@@ -9,12 +9,16 @@ import java.util.List;
 
 import com.edu.ifpb.domain.model.domain.Cidade;
 import com.edu.ifpb.domain.model.jdbc.ConnectionFactory;
+import com.vividsolutions.jts.io.ParseException;
+import com.vividsolutions.jts.io.WKTReader;
 
 public class CidadeDAOImpl implements CidadeDAO {
-	private ConnectionFactory factory;
+	public ConnectionFactory factory;
+	public WKTReader reader;
 
 	public CidadeDAOImpl() {
 		factory = new ConnectionFactory();
+		reader = new WKTReader();
 	}
 
 	@Override
@@ -36,21 +40,25 @@ public class CidadeDAOImpl implements CidadeDAO {
 	}
 
 	@Override
-	public Cidade buscarCidadeEstado(String cidade, String estado) throws ClassNotFoundException, SQLException {
-//		try (Connection connection = factory.getConnection()) {
-//			PreparedStatement statement = connection
-//					.prepareStatement("SELECT nome,populacao_2010,densidade_demo,area FROM cidades WHERE nome ilike ?");
-//			statement.setString(1, nomeCidade);
-//			ResultSet resultado = statement.executeQuery();
-//			if (resultado.next()) {
-//				Cidade cidade = new Cidade();
-//				cidade.setNome(resultado.getString(1));
-//				cidade.setPopulacao(resultado.getInt(2));
-//				cidade.setDensidade_demo(resultado.getFloat(3));
-//				cidade.setArea(resultado.getFloat(4));
-//				return cidade;
-//			}
-//		}
+	public Cidade buscarCidadeEstado(String nomeCidade, String nomeEstado) throws ClassNotFoundException, SQLException, ParseException {
+		try (Connection connection = factory.getConnection()) {
+			PreparedStatement statement = connection
+					.prepareStatement("SELECT c.nome,c.populacao_2010,e.nome,c.densidade_demo,c.area,ST_AsEWKT(c.geom) FROM cidade c, estados e WHERE c.nome ilike ? and e.nome ilike ?");
+			statement.setString(1, nomeCidade);
+			statement.setString(2, nomeEstado);
+			ResultSet resultado = statement.executeQuery();
+			Cidade cidade = new Cidade();
+			if(resultado.next()) {
+				cidade.setNome(resultado.getString(1));
+				cidade.setPopulacao(resultado.getInt(2));
+				cidade.setEstado(resultado.getString(3));
+				cidade.setDensidade_demo(resultado.getFloat(4));
+				cidade.setArea(resultado.getFloat(5));
+//				TRANSFORMA O TEXTO EM UMA GEOMETRIA COM A CLASSE WKTReader
+				cidade.setGeom(reader.read(resultado.getString(6)));
+				return cidade;
+			}
+		}
 		return null;
 	}
 

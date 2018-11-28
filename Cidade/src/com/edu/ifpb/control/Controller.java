@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.edu.ifpb.domain.model.dao.CidadeDAOImpl;
 import com.edu.ifpb.domain.model.domain.Cidade;
+import com.vividsolutions.jts.io.ParseException;
 
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
@@ -20,9 +21,8 @@ public class Controller extends HttpServlet {
 		CidadeDAOImpl daoCidade = new CidadeDAOImpl();
 		Cidade cidade = null;
 		try {
-			 cidade = daoCidade.buscar(cidadeNome);
-			 System.out.println(cidade);
-		} catch (ClassNotFoundException | SQLException e) {
+			 cidade = daoCidade.buscarCidadeEstado(request.getParameter("cidade"),request.getParameter("estado"));
+		} catch (ClassNotFoundException | SQLException | ParseException e) {
 			e.printStackTrace();
 		}
 		request.setAttribute("cidade", cidade);

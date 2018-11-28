@@ -11,7 +11,7 @@ public class ConnectionFactory {
 	
 	public Connection getConnection() throws ClassNotFoundException, SQLException{
 		Class.forName("org.postgresql.Driver");
-		url = "jdbc:postgresql://localhost:5432/DB_ATVD";
+		url = "jdbc:postgresql://localhost:5432/Brasil";
 		usuario="leanderson";
 		senha="08lEo!@#";
 		

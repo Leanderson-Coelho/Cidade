@@ -1,5 +1,7 @@
 package com.edu.ifpb.domain.model.domain;
 
+import com.vividsolutions.jts.geom.Geometry;
+
 //import com.vividsolutions.jts.geom.Geometry;
 
 public class Cidade {
@@ -8,16 +10,17 @@ public class Cidade {
 	private int populacao;
 	private Float densidade_demo;
 	private Float area;
-//	private Geometry geom;
+	private Geometry geom;
 	
 	public Cidade() {}
-	
-	public Cidade(String nome, String estado, int populacao, Float densidade_demo, Float area) {
+
+	public Cidade(String nome, String estado, int populacao, Float densidade_demo, Float area, Geometry geom) {
 		this.nome = nome;
 		this.estado = estado;
 		this.populacao = populacao;
 		this.densidade_demo = densidade_demo;
 		this.area = area;
+		this.geom = geom;
 	}
 
 	public String getNome() {
@@ -60,11 +63,22 @@ public class Cidade {
 		this.area = area;
 	}
 
+	public Geometry getGeom() {
+		return geom;
+	}
+
+	public void setGeom(Geometry geom) {
+		this.geom = geom;
+	}
+
 	@Override
 	public String toString() {
 		return "Cidade [nome=" + nome + ", estado=" + estado + ", populacao=" + populacao + ", densidade_demo="
 				+ densidade_demo + ", area=" + area + "]";
 	}
+	
+	
+	
 	
 	
 

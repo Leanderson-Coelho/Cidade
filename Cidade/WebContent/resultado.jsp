@@ -12,5 +12,6 @@
 	<p>Nome:${cidade.nome }</p>
 	<p>Area:${cidade.area }</p>
 	<p>População:${cidade.populacao }</p>
+	<p>Estado:${cidade.estado }</p>
 </body>
 </html>
