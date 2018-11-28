@@ -25,9 +25,9 @@ public class CidadeDAOImpl implements CidadeDAO{
 			if(resultado.next()) {
 				Cidade cidade = new Cidade();
 				cidade.setNome(resultado.getString(1));
-				cidade.setPopulacao(resultado.getInt(1));
-				cidade.setDensidade_demo(resultado.getFloat(1));
-				cidade.setArea(resultado.getFloat(2));
+				cidade.setPopulacao(resultado.getInt(2));
+				cidade.setDensidade_demo(resultado.getFloat(3));
+				cidade.setArea(resultado.getFloat(4));
 				return cidade;
 			}
 		}
