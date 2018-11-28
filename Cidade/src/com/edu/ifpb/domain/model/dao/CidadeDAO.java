@@ -6,6 +6,7 @@ import java.util.List;
 import com.edu.ifpb.domain.model.domain.Cidade;
 
 public interface CidadeDAO {
-	public Cidade buscar(String nome) throws ClassNotFoundException, SQLException;
-	public List<Cidade> listar();
+	Cidade buscarCidadeEstado(String cidade, String estado) throws ClassNotFoundException, SQLException;
+	List<String> buscarNomeCidadesEstado(String estado) throws ClassNotFoundException, SQLException;
+	List<String> buscarNomeEstados() throws ClassNotFoundException, SQLException;
 }

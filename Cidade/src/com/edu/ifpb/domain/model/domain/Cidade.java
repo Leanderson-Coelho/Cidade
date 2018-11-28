@@ -1,5 +1,7 @@
 package com.edu.ifpb.domain.model.domain;
 
+//import com.vividsolutions.jts.geom.Geometry;
+
 public class Cidade {
 	private String nome;
 	private String estado;
