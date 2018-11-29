@@ -1,5 +1,6 @@
 package com.edu.ifpb.domain.model.dao;
 
+import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,7 +44,7 @@ public class CidadeDAOImpl implements CidadeDAO {
 	public Cidade buscarCidadeEstado(String nomeCidade, String nomeEstado) throws ClassNotFoundException, SQLException, ParseException {
 		try (Connection connection = factory.getConnection()) {
 			PreparedStatement statement = connection
-					.prepareStatement("SELECT c.nome, c.populacao_2010, c.area, ST_AsText(ST_AsEWKT(c.geom)) FROM cidade c, estados e WHERE c.nome ilike ? and e.nome ilike ?");
+					.prepareStatement("SELECT c.nome, c.populacao_2010, c.area, ST_AsText(ST_AsEWKT(c.geom)),ST_AsSVG(geom) FROM cidade c, estados e WHERE c.nome ilike ? and e.nome ilike ?");
 			statement.setString(1, nomeCidade);
 			statement.setString(2, nomeEstado);
 			ResultSet resultado = statement.executeQuery();
@@ -54,6 +55,7 @@ public class CidadeDAOImpl implements CidadeDAO {
 				cidade.setArea(resultado.getFloat(3));
 //				TRANSFORMA O TEXTO EM UMA GEOMETRIA COM A CLASSE WKTReader
 				cidade.setGeom(reader.read(resultado.getString(4)));
+				cidade.setSvg(resultado.getString(5));
 				return cidade;
 			}
 		}
@@ -80,5 +82,21 @@ public class CidadeDAOImpl implements CidadeDAO {
 		}
 		return null;
 	}
+
+	@Override
+	public String getViewBox(String cidade1, String cidade2) throws ClassNotFoundException, SQLException {
+		try(Connection connection = factory.getConnection()){
+			PreparedStatement statement = connection.prepareStatement("select getviewbox(?,?)");
+			statement.setString(1, cidade1);
+			statement.setString(2, cidade2);
+			ResultSet resultado = statement.executeQuery();
+			if(resultado.next()) {
+				return resultado.getString(1);
+			}
+		}
+		return null;
+	}
+	
+
 
 }

@@ -15,16 +15,15 @@ import com.edu.ifpb.domain.model.domain.Cidade;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.io.ParseException;
 
-@WebServlet("/controller")
+@WebServlet("/inicio")
 public class Controller extends HttpServlet {
 	public static String estadoAnterior1 = null;
 	public static String estadoAnterior2 = null;
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String comando = request.getParameter("comando");
 		try {
-			Command command = (Command) Class.forName("com.edu.ifpb.control."+comando).newInstance();
-			command.execute(request, response);
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			Command CidadeCommand = new CidadeCommand();
+			CidadeCommand.execute(request, response);
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
@@ -87,10 +86,18 @@ public class Controller extends HttpServlet {
 		
 		if(!estadoAtual2.equals("___NENHUM___") && !estadoAtual1.equals("___NENHUM___") && !cidadeNome1.equals("___NENHUM___") && !cidadeNome2.equals("___NENHUM___")) {
 			Float dist = (float) (cidade1.getGeom().getCentroid().distance(cidade2.getGeom().getCentroid()) * (40075/360));
+			try {
+				request.setAttribute("viewBox", dao.getViewBox(cidade1.getNome(), cidade2.getNome()));
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
 			request.setAttribute("distancia", dist);
 		}
 		else {
 			request.setAttribute("distancia", null);
+			request.setAttribute("viewBox", null);
+			
 		}
 //------------------------------------------------------------------------------------//		
 		try {
