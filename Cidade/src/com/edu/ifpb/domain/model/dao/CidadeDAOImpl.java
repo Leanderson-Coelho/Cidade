@@ -26,7 +26,7 @@ public class CidadeDAOImpl implements CidadeDAO {
 		List<String> estados = new ArrayList<>();
 		try(Connection connection = factory.getConnection()){
 			PreparedStatement statement = connection.prepareStatement(
-					"select nome from estados");
+					"select nome from estados order by nome");
 			ResultSet resultado = statement.executeQuery();
 			if(resultado!= null) {
 				while(resultado.next()) {
@@ -43,7 +43,7 @@ public class CidadeDAOImpl implements CidadeDAO {
 	public Cidade buscarCidadeEstado(String nomeCidade, String nomeEstado) throws ClassNotFoundException, SQLException, ParseException {
 		try (Connection connection = factory.getConnection()) {
 			PreparedStatement statement = connection
-					.prepareStatement("SELECT c.nome,c.populacao_2010,e.nome,c.densidade_demo,c.area,ST_AsEWKT(c.geom) FROM cidade c, estados e WHERE c.nome ilike ? and e.nome ilike ?");
+					.prepareStatement("SELECT c.nome, c.populacao_2010, c.area, ST_AsText(ST_AsEWKT(c.geom)) FROM cidade c, estados e WHERE c.nome ilike ? and e.nome ilike ?");
 			statement.setString(1, nomeCidade);
 			statement.setString(2, nomeEstado);
 			ResultSet resultado = statement.executeQuery();
@@ -51,11 +51,9 @@ public class CidadeDAOImpl implements CidadeDAO {
 			if(resultado.next()) {
 				cidade.setNome(resultado.getString(1));
 				cidade.setPopulacao(resultado.getInt(2));
-				cidade.setEstado(resultado.getString(3));
-				cidade.setDensidade_demo(resultado.getFloat(4));
-				cidade.setArea(resultado.getFloat(5));
+				cidade.setArea(resultado.getFloat(3));
 //				TRANSFORMA O TEXTO EM UMA GEOMETRIA COM A CLASSE WKTReader
-				cidade.setGeom(reader.read(resultado.getString(6)));
+				cidade.setGeom(reader.read(resultado.getString(4)));
 				return cidade;
 			}
 		}
@@ -67,9 +65,9 @@ public class CidadeDAOImpl implements CidadeDAO {
 		List<String> cidades = new ArrayList<>();
 		try(Connection connection = factory.getConnection()){
 			PreparedStatement statement = connection.prepareStatement(
-					"select c.nome\n" + 
-					"from cidade c, estados e \n" + 
-					"where c.estado_id = e.id and e.nome ilike ?\n"+
+					"select c.nome " + 
+					"from cidade c, estados e " + 
+					"where c.estado_id = e.id and e.nome ilike ? "+
 					"order by c.nome");
 			statement.setString(1, estado);
 			ResultSet resultado = statement.executeQuery();

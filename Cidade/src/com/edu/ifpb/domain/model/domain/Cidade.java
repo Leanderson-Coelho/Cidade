@@ -6,19 +6,15 @@ import com.vividsolutions.jts.geom.Geometry;
 
 public class Cidade {
 	private String nome;
-	private String estado;
-	private int populacao;
-	private Float densidade_demo;
+	private Integer populacao;
 	private Float area;
 	private Geometry geom;
 	
 	public Cidade() {}
 
-	public Cidade(String nome, String estado, int populacao, Float densidade_demo, Float area, Geometry geom) {
+	public Cidade(String nome, Integer populacao, Float area, Geometry geom) {
 		this.nome = nome;
-		this.estado = estado;
 		this.populacao = populacao;
-		this.densidade_demo = densidade_demo;
 		this.area = area;
 		this.geom = geom;
 	}
@@ -31,28 +27,16 @@ public class Cidade {
 		this.nome = nome;
 	}
 
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
-	public int getPopulacao() {
+	public Integer getPopulacao() {
 		return populacao;
 	}
 
-	public void setPopulacao(int populacao) {
+	public void setPopulacao(Integer populacao) {
 		this.populacao = populacao;
 	}
 
 	public Float getDensidade_demo() {
-		return densidade_demo;
-	}
-
-	public void setDensidade_demo(Float densidade_demo) {
-		this.densidade_demo = densidade_demo;
+		return ((float)populacao)/area;
 	}
 
 	public Float getArea() {
@@ -71,16 +55,15 @@ public class Cidade {
 		this.geom = geom;
 	}
 
+	public Float getPerimetro() {
+		return (float) (geom.getLength() * (40075/360));
+	}
+
 	@Override
 	public String toString() {
-		return "Cidade [nome=" + nome + ", estado=" + estado + ", populacao=" + populacao + ", densidade_demo="
-				+ densidade_demo + ", area=" + area + "]";
+		return "Cidade [nome=" + nome + ", populacao=" + populacao + ", area=" + area + "]";
 	}
 	
-	
-	
-	
-	
 
-
+	
 }

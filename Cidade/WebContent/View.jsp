@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -43,52 +42,56 @@ div {
 </head>
 <body>
 	<div id="container">
-		<form action="" method="POST">
+		<form action="controller" method="POST">
 			<div class="infoCidade">
 				<h2>Cidade 1</h2><br>
 				<label class="infoBox">Estado 
-					<select name="estado1" onchange="this.submit()">
+					<select name="estado1" onchange="this.form.submit()" >
+						<option>___NENHUM___</option>
 						<c:forEach var="estado" items="${estados}">
-							<option>${estado}</option>
+							<option ${estado1==estado?'selected':''}>${estado}</option>
 						</c:forEach>
 					</select>
 				</label><br> 
 				<label class="infoBox">Cidade 
-					<select name="cidade1">
-						<c:forEach var="cidade" items="${}">
-							<option>${cidade}</option>
+					<select name="cidade1" onchange="this.form.submit()" >
+						<option>___NENHUM___</option>
+						<c:forEach var="cidade" items="${nomeCidades1}">
+							<option ${cidadeNome1==cidade?'selected':''}>${cidade}</option>
 						</c:forEach>
 					</select>
 				</label><br> 
-				<label class="infoLabel">Popula√ß√£o: ${cidade1.getPopulacao()}</label><br>
-				<label class="infoLabel">Densidade demogr√°fica: ${cidade1.getDensidade_demo()}</label><br> 
-				<label class="infoLabel">√Årea: ${cidade1.getArea()}km¬≤</label><br> 
-				<label class="infoLabel">Per√≠metro: ${cidade1.getPerimetro()}km</label><br>
+				<label class="infoLabel">PopulaÁ„o: ${cidade1.getPopulacao()}</label><br>
+				<label class="infoLabel">Densidade demogr·fica: ${cidade1.getDensidade_demo()} hab/Km≤</label><br> 
+				<label class="infoLabel">¡rea: ${cidade1.getArea()} km≤</label><br> 
+				<label class="infoLabel">PerÌmetro: ${cidade1.getPerimetro()} km</label><br>
 			</div>
 
 			<div class="infoCidade">
 				<h2>Cidade 2</h2><br> 
 				<label class="infoBox">Estado 
-					<select name="estado2">
+					<select name="estado2" onchange="this.form.submit()">
+						<option>___NENHUM___</option>
 						<c:forEach var="estado" items="${estados}">
-							<option>${estado}</option>
+							<option ${estado2==estado?'selected':''}>${estado}</option>
 						</c:forEach>
 					</select>
 				</label><br> 
 				<label class="infoBox">Cidade 
-					<select name="cidade2">
-						<c:forEach var="cidade" items="${}">
-							<option>${cidade}</option>
+					<select name="cidade2" onchange="this.form.submit()" >
+						<option>___NENHUM___</option>
+						<c:forEach var="cidade" items="${nomeCidades2}">
+							<option ${cidadeNome2==cidade?'selected':''}>${cidade}</option>
 						</c:forEach>
 					</select>
 				</label><br> 
-				<label class="infoLabel">Popula√ß√£o: ${cidade2.getPopulacao()}</label><br> 
-				<label class="infoLabel">Densidade demogr√°fica: ${cidade2.getDensidade_demo()}</label><br> 
-				<label class="infoLabel">√Årea: ${cidade2.getArea()}km¬≤</label><br> 
-				<label class="infoLabel">Per√≠metro: ${cidade2.getPerimetro()}km</label><br>
+				<label class="infoLabel">PopulaÁ„o: ${cidade2.getPopulacao()}</label><br> 
+				<label class="infoLabel">Densidade demogr·fica: ${cidade2.getDensidade_demo()} hab/Km≤</label><br> 
+				<label class="infoLabel">¡rea: ${cidade2.getArea()} km≤</label><br> 
+				<label class="infoLabel">PerÌmetro: ${cidade2.getPerimetro()} km</label><br>
 			</div><br>
 			<div class="divDown">
-				<label>Dist√¢ncia Aproximada: ${distancia}km</label><br>
+				<label>Dist‚ncia Aproximada: ${distancia} km</label><br>
 				<div id=svg>SVG</div>
 				<!--<br><input type="submit" value="Buscar">-->
 			</div>
