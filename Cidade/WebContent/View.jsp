@@ -41,7 +41,7 @@ div {
 </head>
 <body>
 	<div id="container">
-		<form action="controller" method="POST">
+		<form action="inicio" method="POST">
 			<div class="infoCidade">
 				<h2>Cidade 1</h2><br>
 				<label class="infoBox">Estado 
@@ -91,7 +91,14 @@ div {
 			</div><br>
 			<div class="divDown">
 				<label>Distância Aproximada: ${distancia} km</label><br>
-				<div id=svg>SVG</div>
+				<div id=svg>
+					<svg viewBox="${viewBox}" width="581" height="200">
+						<path d="${cidade1.getSvg()}" stroke="blue" stroke-width="0.005" fill="red" fill-opacity=""/>
+						<path d="${cidade2.getSvg()}" stroke="blue" stroke-width="0.005" fill="red" fill-opacity=""/>
+						
+						<!--<circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />-->
+					</svg>
+				</div>
 				<!--<br><input type="submit" value="Buscar">-->
 			</div>
 		</form>

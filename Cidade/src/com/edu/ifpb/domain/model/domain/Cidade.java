@@ -9,6 +9,7 @@ public class Cidade {
 	private Integer populacao;
 	private Float area;
 	private Geometry geom;
+	private String svg;
 	
 	public Cidade() {}
 
@@ -57,6 +58,14 @@ public class Cidade {
 
 	public Float getPerimetro() {
 		return (float) (geom.getLength() * (40075/360));
+	}
+
+	public String getSvg() {
+		return svg;
+	}
+
+	public void setSvg(String svg) {
+		this.svg = svg;
 	}
 
 	@Override

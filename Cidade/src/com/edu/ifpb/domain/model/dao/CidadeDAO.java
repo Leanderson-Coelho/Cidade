@@ -10,4 +10,5 @@ public interface CidadeDAO {
 	Cidade buscarCidadeEstado(String cidade, String estado) throws ClassNotFoundException, SQLException, ParseException;
 	List<String> buscarNomeCidadesEstado(String estado) throws ClassNotFoundException, SQLException;
 	List<String> buscarNomeEstados() throws ClassNotFoundException, SQLException;
+	String getViewBox(String cidade1, String cidade2) throws ClassNotFoundException, SQLException;
 }
