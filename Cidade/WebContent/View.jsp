@@ -12,7 +12,7 @@ div {
 
 .divDown {
 	text-align: center;
-	width: 40.5vw;
+	width: 50.5vw;
 	margin-top: 20px;
 }
 
@@ -22,7 +22,7 @@ div {
 
 #container {
 	width: 100vw;
-	padding: 0% 0% 0% 30%;
+	padding: 0% 0% 0% 25%;
 }
 
 .infoLabel {
@@ -30,12 +30,11 @@ div {
 }
 
 .infoBox {
-	margin-left: 50px;
 	display: block;
 }
 
 .infoCidade {
-	width: 20vw;
+	width: 25vw;
 	display: inline-table;
 }
 </style>
