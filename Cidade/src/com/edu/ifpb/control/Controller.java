@@ -85,7 +85,7 @@ public class Controller extends HttpServlet {
 			request.setAttribute("cidade2", null);
 		}
 		
-		if(!cidadeNome1.equals("___NENHUM___") && !cidadeNome2.equals("___NENHUM___")) {
+		if(!estadoAtual2.equals("___NENHUM___") && !estadoAtual1.equals("___NENHUM___") && !cidadeNome1.equals("___NENHUM___") && !cidadeNome2.equals("___NENHUM___")) {
 			Float dist = (float) (cidade1.getGeom().getCentroid().distance(cidade2.getGeom().getCentroid()) * (40075/360));
 			request.setAttribute("distancia", dist);
 		}
