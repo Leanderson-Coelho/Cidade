@@ -48,7 +48,7 @@ div {
 				<h2>Cidade 1</h2><br>
 				<label class="infoBox">Estado 
 					<select name="estado1" onchange="this.submit()">
-						<c:forEach var="estado" items="${}">
+						<c:forEach var="estado" items="${estados}">
 							<option>${estado}</option>
 						</c:forEach>
 					</select>
@@ -70,7 +70,7 @@ div {
 				<h2>Cidade 2</h2><br> 
 				<label class="infoBox">Estado 
 					<select name="estado2">
-						<c:forEach var="estado" items="${}">
+						<c:forEach var="estado" items="${estados}">
 							<option>${estado}</option>
 						</c:forEach>
 					</select>

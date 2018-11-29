@@ -15,21 +15,20 @@ import com.vividsolutions.jts.io.ParseException;
 
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String cidadeNome = request.getParameter("cidade");
-		CidadeDAOImpl daoCidade = new CidadeDAOImpl();
-		Cidade cidade = null;
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String comando = request.getParameter("comando");
 		try {
-			 cidade = daoCidade.buscarCidadeEstado(request.getParameter("cidade"),request.getParameter("estado"));
-		} catch (ClassNotFoundException | SQLException | ParseException e) {
+			Command command = (Command) Class.forName("com.edu.ifpb.control."+comando).newInstance();
+			command.execute(request, response);
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.setAttribute("cidade", cidade);
-		request.getRequestDispatcher("resultado.jsp").forward(request, response);
+		
+		
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 

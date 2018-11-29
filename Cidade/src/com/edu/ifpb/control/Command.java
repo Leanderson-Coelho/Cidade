@@ -1,9 +1,13 @@
 package com.edu.ifpb.control;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+
 
 public interface Command {
-	public void execute(HttpServletRequest request,HttpServletResponse response);
+	public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException;
 }
