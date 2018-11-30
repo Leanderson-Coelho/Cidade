@@ -10,15 +10,9 @@ public class Cidade {
 	private Float area;
 	private Geometry geom;
 	private String svg;
+	private Integer estado_id;
 	
 	public Cidade() {}
-
-	public Cidade(String nome, Integer populacao, Float area, Geometry geom) {
-		this.nome = nome;
-		this.populacao = populacao;
-		this.area = area;
-		this.geom = geom;
-	}
 
 	public String getNome() {
 		return nome;
@@ -71,6 +65,14 @@ public class Cidade {
 	@Override
 	public String toString() {
 		return "Cidade [nome=" + nome + ", populacao=" + populacao + ", area=" + area + "]";
+	}
+
+	public Integer getEstado_id() {
+		return estado_id;
+	}
+
+	public void setEstado_id(Integer estado_id) {
+		this.estado_id = estado_id;
 	}
 	
 

@@ -81,7 +81,7 @@ public class Controller extends HttpServlet {
 		if(cidade1!=null && cidade2!=null) {
 			Float dist = (float) (cidade1.getGeom().getCentroid().distance(cidade2.getGeom().getCentroid()) * (40075/360));
 			try {
-				request.setAttribute("viewBox", dao.getViewBox(cidade1.getNome(), cidade2.getNome()));
+				request.setAttribute("viewBox", dao.getViewBox(cidade1, cidade2));
 			} catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
 			}			
