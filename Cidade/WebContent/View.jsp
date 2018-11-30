@@ -43,7 +43,7 @@ div {
 	<div id="container">
 		<form action="inicio" method="POST">
 			<div class="infoCidade">
-				<h2>Cidade 1</h2><br>
+				<h2 style="color: red;">Cidade 1</h2><br>
 				<label class="infoBox">Estado 
 					<select name="estado1" onchange="this.form.submit()" >
 						<option>___NENHUM___</option>
@@ -67,7 +67,7 @@ div {
 			</div>
 
 			<div class="infoCidade">
-				<h2>Cidade 2</h2><br> 
+				<h2 style="color: blue;">Cidade 2</h2><br> 
 				<label class="infoBox">Estado 
 					<select name="estado2" onchange="this.form.submit()">
 						<option>___NENHUM___</option>
@@ -93,10 +93,8 @@ div {
 				<label>Distância Aproximada: ${distancia} km</label><br>
 				<div id=svg>
 					<svg viewBox="${viewBox}" width="581" height="200">
-						<path d="${cidade1.getSvg()}" stroke="blue" stroke-width="0.005" fill="red" fill-opacity=""/>
-						<path d="${cidade2.getSvg()}" stroke="blue" stroke-width="0.005" fill="red" fill-opacity=""/>
-						
-						<!--<circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />-->
+						<path d="${cidade1.getSvg()}" stroke="black" stroke-width="0.005" fill="red" fill-opacity=""/>
+						<path d="${cidade2.getSvg()}" stroke="black" stroke-width="0.005" fill="blue" fill-opacity=""/>
 					</svg>
 				</div>
 				<!--<br><input type="submit" value="Buscar">-->
