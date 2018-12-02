@@ -38,8 +38,6 @@ public class Controller extends HttpServlet {
 		String cidadeNome2 = request.getParameter("cidade2");
 		request.setAttribute("estado1", estadoNome1);
 		request.setAttribute("estado2", estadoNome2);
-		request.setAttribute("cidadeNome1", cidadeNome1);
-		request.setAttribute("cidadeNome2", cidadeNome2);
 		Cidade cidade1 = null, cidade2 = null;
 //--------------------------------------------------------------------------------------//		
 		if(!estadoNome1.equals("___NENHUM___")) {
@@ -56,6 +54,7 @@ public class Controller extends HttpServlet {
 				} catch (ClassNotFoundException | SQLException | ParseException e) {
 					e.printStackTrace();
 				}
+				request.setAttribute("cidadeNome1", cidadeNome1);//pode haver cidades com mesmo nome em estados diferentes
 			}
 			estadoAnterior1 = estadoNome1;
 		}
@@ -74,6 +73,7 @@ public class Controller extends HttpServlet {
 				} catch (ClassNotFoundException | SQLException | ParseException e) {
 					e.printStackTrace();
 				}
+				request.setAttribute("cidadeNome2", cidadeNome2);//pode haver cidades com mesmo nome em estados diferentes
 			}
 			estadoAnterior2 = estadoNome2;
 		}
